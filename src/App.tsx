@@ -1,10 +1,15 @@
 import "./App.css";
-
-import * as React from "react";
-import Button from "@mui/material/Button";
+import { Routes, Route } from "react-router-dom";
+import Homepage from "./Components/homepage";
 
 function App() {
-  return <Button variant="contained">Hello world</Button>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
