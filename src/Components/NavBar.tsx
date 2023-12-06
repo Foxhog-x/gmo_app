@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router";
-import { DataGrid } from "@mui/x-data-grid";
 
 const pages = ["React-grid", "Tree-Structure"];
 
@@ -47,7 +46,7 @@ const NavBar: React.FC<NavBar> = (props) => {
     if (page === "React-grid") {
       navigate("/datagridpage");
     } else {
-      navigate("/sec_comp2");
+      navigate("/treestructure");
     }
     setAnchorElNav(null);
   };

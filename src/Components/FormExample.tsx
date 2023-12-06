@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import "./Secondpage.css";
+import "./style.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
 
 interface FormValues {
   name: string;
@@ -75,8 +76,11 @@ const FormExample: React.FC<FormValues> = (props) => {
     }
   }, []);
   return (
-    <div>
+    <div className="main_container">
       <div className="form-container">
+        <Typography variant="h4" gutterBottom>
+          Login Form
+        </Typography>
         <form onSubmit={handleSubmit}>
           <div>{enterDetailText && "Please Enter Details"}</div>
 
@@ -86,6 +90,7 @@ const FormExample: React.FC<FormValues> = (props) => {
             name="name"
             value={formValues.name}
             onChange={handleInputChange}
+            fullWidth
             margin="normal"
           />
           <TextField
@@ -109,6 +114,7 @@ const FormExample: React.FC<FormValues> = (props) => {
             onChange={handleInputChange}
             error={!isValidEmail}
             helperText={!isValidEmail ? "Please enter a valid email" : ""}
+            fullWidth
             margin="normal"
           />
           <div className="button-div">
@@ -125,7 +131,7 @@ const FormExample: React.FC<FormValues> = (props) => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => navigate("/sec")}
+                onClick={() => navigate("/datagridpage")}
               >
                 Continue with Exsting User
               </Button>

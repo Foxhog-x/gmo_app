@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import NavBar from "./NavBar";
+import "./style.css";
 
 interface Department {
   department: string;
@@ -20,7 +21,7 @@ const departmentData: Department[] = [
   },
 ];
 
-const Sec_Comp2: React.FC<Department> = () => {
+const TreeStructure: React.FC<Department> = () => {
   const [checked, setChecked] = React.useState<boolean[]>([false, false]);
   const [formData, setFormData] = React.useState<FormData | null>(null);
 
@@ -112,4 +113,4 @@ const Sec_Comp2: React.FC<Department> = () => {
   );
 };
 
-export default Sec_Comp2;
+export default TreeStructure;

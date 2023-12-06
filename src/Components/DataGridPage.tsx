@@ -3,10 +3,11 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import "./Secondpage.css";
-import { Link } from "react-router-dom";
+import "./style.css";
+
 import NavBar from "./NavBar";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Typography } from "@mui/material";
 
 interface DataGridPage {
   name: string;
@@ -39,7 +40,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
     navigate("/");
   };
 
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<DataGridPage[]>([]);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -60,10 +61,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
       <NavBar formData={formData} />
       <div className="main-container">
         <div className="nav-page2">
-          <h1>Stored Form Data</h1>
-          <h1>
-            <Link to="/Sec_Comp1">Second-Page/component-1</Link>
-          </h1>
+          <Typography variant="h4">Stored Form Data</Typography>
         </div>
 
         {formData ? (
