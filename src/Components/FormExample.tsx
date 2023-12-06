@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import "./Secondpage.css";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 interface FormValues {
   name: string;
@@ -11,7 +17,11 @@ interface FormValues {
 }
 
 const FormExample: React.FC<FormValues> = (props) => {
-  const { enterDetailText } = props;
+  const { enterDetailText, setEnterDetailText } = props;
+
+  const handleClose = () => {
+    setEnterDetailText(false);
+  };
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
@@ -23,6 +33,7 @@ const FormExample: React.FC<FormValues> = (props) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    setEnterDetailText(false);
     setFormValues({
       ...formValues,
       [name]: value,
@@ -52,54 +63,94 @@ const FormExample: React.FC<FormValues> = (props) => {
     } else {
       console.log("Submitted:", formValues);
       localStorage.setItem("formData", JSON.stringify(formValues));
-      navigate("/sec");
+      navigate("/datagridpage");
     }
   };
-
+  const [existingUser, setExistingUser] = useState(false);
+  useEffect(() => {
+    const storedData = localStorage.getItem("formData");
+    console.log("storedata", storedData);
+    if (storedData) {
+      setExistingUser(true);
+    }
+  }, []);
   return (
-    <form onSubmit={handleSubmit}>
-      <div>{enterDetailText && "Please Enter Details"}</div>
+    <div>
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <div>{enterDetailText && "Please Enter Details"}</div>
 
-      <TextField
-        label="Name"
-        variant="outlined"
-        name="name"
-        value={formValues.name}
-        onChange={handleInputChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Phone Number"
-        variant="outlined"
-        name="phoneNumber"
-        value={formValues.phoneNumber}
-        onChange={handleInputChange}
-        error={!isValidPhone}
-        helperText={!isValidPhone ? "Please enter a valid phone number" : ""}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Email"
-        variant="outlined"
-        name="email"
-        value={formValues.email}
-        onChange={handleInputChange}
-        error={!isValidEmail}
-        helperText={!isValidEmail ? "Please enter a valid email" : ""}
-        fullWidth
-        margin="normal"
-      />
-      <Button
-        type="submit"
-        disabled={!isValidEmail}
-        variant="contained"
-        color="primary"
+          <TextField
+            label="Name"
+            variant="outlined"
+            name="name"
+            value={formValues.name}
+            onChange={handleInputChange}
+            margin="normal"
+          />
+          <TextField
+            label="Phone Number"
+            variant="outlined"
+            name="phoneNumber"
+            value={formValues.phoneNumber}
+            onChange={handleInputChange}
+            error={!isValidPhone}
+            helperText={
+              !isValidPhone ? "Please enter a valid phone number" : ""
+            }
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Email"
+            variant="outlined"
+            name="email"
+            value={formValues.email}
+            onChange={handleInputChange}
+            error={!isValidEmail}
+            helperText={!isValidEmail ? "Please enter a valid email" : ""}
+            margin="normal"
+          />
+          <div className="button-div">
+            {" "}
+            <Button
+              type="submit"
+              disabled={!isValidEmail}
+              variant="contained"
+              color="primary"
+            >
+              Submit
+            </Button>
+            {existingUser && (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => navigate("/sec")}
+              >
+                Continue with Exsting User
+              </Button>
+            )}
+          </div>
+        </form>
+      </div>
+
+      <Dialog
+        open={enterDetailText}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        Submit
-      </Button>
-    </form>
+        <DialogTitle id="alert-dialog-title">{"Warning"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Please enter user details before proceeding to another page!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Agree</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 

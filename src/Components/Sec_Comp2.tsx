@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import NavBar from "./NavBar";
 
 interface Department {
   department: string;
@@ -21,7 +22,16 @@ const departmentData: Department[] = [
 
 const Sec_Comp2: React.FC<Department> = () => {
   const [checked, setChecked] = React.useState<boolean[]>([false, false]);
+  const [formData, setFormData] = React.useState<FormData | null>(null);
 
+  React.useEffect(() => {
+    const storedData = localStorage.getItem("formData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+
+      setFormData(parsedData);
+    }
+  }, []);
   const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newChecked = [event.target.checked, event.target.checked];
     setChecked(newChecked);
@@ -73,29 +83,32 @@ const Sec_Comp2: React.FC<Department> = () => {
   ));
 
   return (
-    <div>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-        }}
-      >
-        <FormControlLabel
-          label="Parent"
-          control={
-            <Checkbox
-              checked={checked[0] && checked[1]}
-              indeterminate={checked[0] !== checked[1]}
-              onChange={handleChange1}
-            />
-          }
-        />
-        {children}
-      </Box>
-    </div>
+    <>
+      <NavBar formData={formData} />
+      <div>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <FormControlLabel
+            label="Parent"
+            control={
+              <Checkbox
+                checked={checked[0] && checked[1]}
+                indeterminate={checked[0] !== checked[1]}
+                onChange={handleChange1}
+              />
+            }
+          />
+          {children}
+        </Box>
+      </div>
+    </>
   );
 };
 

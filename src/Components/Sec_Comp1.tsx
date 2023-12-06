@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import "./Secondpage.css";
-import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
+
 interface Post {
   id: number;
   title: string;
   body: string;
+  setEnterDetailText: any;
 }
 
-const Sec: React.FC = () => {
+const Sec_Comp1: React.FC<Post> = (props) => {
+  const { setEnterDetailText } = props;
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -27,24 +30,26 @@ const Sec: React.FC = () => {
   ];
 
   return (
-    <div
-      style={{
-        height: "600px",
-        width: "90%",
-        margin: "30px",
-        textAlign: "center",
-      }}
-    >
-      <div className="nav-page2">
-        <h1>Secondpage/Component-1</h1>
-        <h1>
-          <Link to={"/sec_comp2"}>Component-2</Link>
-        </h1>
-      </div>
+    <>
+      <div
+        style={{
+          height: "600px",
+          width: "90%",
+          margin: "30px",
+          textAlign: "center",
+        }}
+      >
+        <div className="nav-page2"></div>
 
-      <DataGrid rows={posts} columns={columns} pageSize={5} checkboxSelection />
-    </div>
+        <DataGrid
+          rows={posts}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+        />
+      </div>
+    </>
   );
 };
 
-export default Sec;
+export default Sec_Comp1;
