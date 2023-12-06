@@ -16,10 +16,18 @@ import { useNavigate } from "react-router";
 
 const pages = ["React-grid", "Tree-Structure"];
 
-interface NavBar {
-  formData: any;
+interface FormData {
+  name: string;
+  email: string;
+  phoneNumber: string;
 }
-const NavBar: React.FC<NavBar> = (props) => {
+
+// Define the NavBar interface with formData property
+interface NavBarProps {
+  formData: FormData;
+}
+
+const NavBar: React.FC<NavBarProps> = (props) => {
   const navigate = useNavigate();
   const { formData } = props;
   const settings = [
@@ -110,7 +118,11 @@ const NavBar: React.FC<NavBar> = (props) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => handleCloseNavMenu(page)}
+                  href="#"
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}

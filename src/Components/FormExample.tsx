@@ -14,7 +14,9 @@ interface FormValues {
   name: string;
   phoneNumber: string;
   email: string;
+  setEnterDetailText: React.Dispatch<React.SetStateAction<boolean>>;
   enterDetailText: boolean;
+  formValues: FormValues;
 }
 
 const FormExample: React.FC<FormValues> = (props) => {

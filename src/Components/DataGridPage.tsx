@@ -8,12 +8,17 @@ import "./style.css";
 import NavBar from "./NavBar";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
-
+interface FormData {
+  name: string;
+  phoneNumber: string;
+  email: string;
+  // ... other properties
+}
 interface DataGridPage {
   name: string;
   phoneNumber: string;
   email: string;
-  setEnterDetailText: any;
+  setEnterDetailText: boolean;
 }
 
 const DataGridPage: React.FC<DataGridPage> = (props) => {
@@ -54,7 +59,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "title", headerName: "Title", width: 300 },
-    { field: "body", headerName: "Body", width: 600, flex: 1, wrap: true },
+    { field: "body", headerName: "Body", width: 600, flex: 1 },
   ];
   return (
     <>
@@ -66,9 +71,9 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
 
         {formData ? (
           <div>
-            <p>Name: {formData.name}</p>
-            <p>Phone Number: {formData.phoneNumber}</p>
-            <p>Email: {formData.email}</p>
+            <p>Name: {formData?.name}</p>
+            <p>Phone Number: {formData?.phoneNumber}</p>
+            <p>Email: {formData?.email}</p>
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         ) : (
@@ -85,12 +90,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
       >
         <div className="nav-page2"></div>
 
-        <DataGrid
-          rows={posts}
-          columns={columns}
-          pageSize={5}
-          checkboxSelection
-        />
+        <DataGrid rows={posts} columns={columns} checkboxSelection />
       </div>
     </>
   );

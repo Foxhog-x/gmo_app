@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import FormExample from "./Components/FormExample";
-
 import DataGridPage from "./Components/DataGridPage";
 import PageNotFound from "./Components/PageNotFound";
 import TreeStructure from "./Components/TreeStructure";
 
-const App = () => {
-  const [enterDetailText, setEnterDetailText] = React.useState<boolean>(false);
+const App: React.FC = () => {
+  const [enterDetailText, setEnterDetailText] = useState<boolean>(false);
 
   return (
     <>
@@ -26,7 +25,6 @@ const App = () => {
           path="/datagridpage"
           element={<DataGridPage setEnterDetailText={setEnterDetailText} />}
         />
-
         <Route path="/treestructure" element={<TreeStructure />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
