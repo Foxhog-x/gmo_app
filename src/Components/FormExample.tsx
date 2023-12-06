@@ -52,7 +52,7 @@ const FormExample: React.FC<FormValues> = (props) => {
     } else {
       console.log("Submitted:", formValues);
       localStorage.setItem("formData", JSON.stringify(formValues));
-      navigate("/secondpage");
+      navigate("/sec");
     }
   };
 

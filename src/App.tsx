@@ -1,9 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Secondpage from "./Components/Secondpage";
-import FormExample from "./Components/FormExample";
 
-interface Secondpage {
+import FormExample from "./Components/FormExample";
+import Sec_Comp1 from "./Components/Sec_Comp1";
+import Sec from "./Components/Sec";
+import Sec_Comp2 from "./Components/Sec_Comp2";
+
+interface Sec {
   setEnterDetailText: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -18,9 +21,11 @@ const App = () => {
           element={<FormExample enterDetailText={enterDetailText} />}
         />
         <Route
-          path="/secondpage"
-          element={<Secondpage setEnterDetailText={setEnterDetailText} />}
+          path="/sec"
+          element={<Sec setEnterDetailText={setEnterDetailText} />}
         />
+        <Route path="/sec_comp1" element={<Sec_Comp1 />} />
+        <Route path="/sec_comp2" element={<Sec_Comp2 />} />
       </Routes>
     </>
   );

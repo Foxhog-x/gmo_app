@@ -1,0 +1,9 @@
+.nav-page2{
+    display: flex;
+    
+    justify-content: space-between;
+}
+.main-container{
+    margin: 20px;
+    padding: 50px;
+}

@@ -3,15 +3,17 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import "./Secondpage.css";
+import { Link } from "react-router-dom";
 
-interface SecondpageProps {
+interface Sec_Comp1Props {
   name: string;
   phoneNumber: string;
   email: string;
   setEnterDetailText: any;
 }
 
-const Secondpage: React.FC<SecondpageProps> = (props) => {
+const Sec_Comp1: React.FC<Sec_Comp1Props> = (props) => {
   const { setEnterDetailText } = props;
 
   const navigate = useNavigate();
@@ -35,8 +37,14 @@ const Secondpage: React.FC<SecondpageProps> = (props) => {
   };
 
   return (
-    <div>
-      <h2>Stored Form Data</h2>
+    <div className="main-container">
+      <div className="nav-page2">
+        <h1>Stored Form Data</h1>
+        <h1>
+          <Link to="/Sec_Comp1">Second-Page/component-1</Link>
+        </h1>
+      </div>
+
       {formData ? (
         <div>
           <p>Name: {formData.name}</p>
@@ -51,4 +59,4 @@ const Secondpage: React.FC<SecondpageProps> = (props) => {
   );
 };
 
-export default Secondpage;
+export default Sec_Comp1;
