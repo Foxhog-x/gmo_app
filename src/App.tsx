@@ -18,14 +18,33 @@ const App: React.FC = () => {
             <FormExample
               enterDetailText={enterDetailText}
               setEnterDetailText={setEnterDetailText}
+              formValues={{
+                name: "",
+                phoneNumber: "",
+                email: "",
+              }}
+              name={""}
+              phoneNumber={""}
+              email={""}
+            />
+          }
+        />
+
+        <Route
+          path="/datagridpage"
+          element={
+            <DataGridPage
+              setEnterDetailText={setEnterDetailText}
+              name={""}
+              phoneNumber={""}
+              email={""}
             />
           }
         />
         <Route
-          path="/datagridpage"
-          element={<DataGridPage setEnterDetailText={setEnterDetailText} />}
+          path="/treestructure"
+          element={<TreeStructure department={""} sub_departments={[]} />}
         />
-        <Route path="/treestructure" element={<TreeStructure />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

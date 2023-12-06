@@ -10,6 +10,13 @@ interface Department {
   sub_departments: string[];
 }
 
+interface FormData {
+  name: string;
+  phoneNumber: string;
+  email: string;
+  // ... other properties
+}
+
 const departmentData: Department[] = [
   {
     department: "customer_service",
@@ -28,11 +35,15 @@ const TreeStructure: React.FC<Department> = () => {
   React.useEffect(() => {
     const storedData = localStorage.getItem("formData");
     if (storedData) {
-      const parsedData = JSON.parse(storedData);
-
-      setFormData(parsedData);
+      try {
+        const parsedData: FormData = JSON.parse(storedData);
+        setFormData(parsedData);
+      } catch (error) {
+        console.error("Error parsing formData:", error);
+      }
     }
   }, []);
+
   const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newChecked = [event.target.checked, event.target.checked];
     setChecked(newChecked);
@@ -49,8 +60,13 @@ const TreeStructure: React.FC<Department> = () => {
       for (let i = index + 1; i < departmentData.length; i++) {
         newChecked[i] = true;
 
-        departmentData[i].sub_departments.forEach((subDepartment, subIndex) => {
-          newChecked[i + subIndex + 1] = true;
+        departmentData[i].sub_departments.forEach((subIndex) => {
+          // Convert subIndex to a number if it represents an index or position
+          const numericSubIndex = parseInt(subIndex, 10); // assuming subIndex is a string representing a number
+
+          if (!isNaN(numericSubIndex)) {
+            newChecked[i + numericSubIndex + 1] = true;
+          }
         });
       }
     }
@@ -85,7 +101,7 @@ const TreeStructure: React.FC<Department> = () => {
 
   return (
     <>
-      <NavBar formData={formData} />
+      <NavBar formData={formData || { name: "", phoneNumber: "", email: "" }} />
       <div>
         <Box
           sx={{

@@ -30,12 +30,13 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = (props) => {
   const navigate = useNavigate();
   const { formData } = props;
-  const settings = [
+  const settings: (string | undefined)[] = [
     formData?.name,
     formData?.phoneNumber,
     formData?.email,
     "Logout",
   ];
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -163,7 +164,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  alt={formData?.name}
+                  alt={formData?.name || "Default Name"}
                   src="/static/images/avatar/2.jpg"
                 />
               </IconButton>
@@ -184,14 +185,16 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => handleCloseUserMenu(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {settings
+                .filter((setting) => setting !== undefined)
+                .map((setting) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleCloseUserMenu(setting || "")}
+                  >
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
             </Menu>
           </Box>
         </Toolbar>

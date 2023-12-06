@@ -18,7 +18,7 @@ interface DataGridPage {
   name: string;
   phoneNumber: string;
   email: string;
-  setEnterDetailText: boolean;
+  setEnterDetailText: (value: boolean) => void;
 }
 
 const DataGridPage: React.FC<DataGridPage> = (props) => {
@@ -63,7 +63,8 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
   ];
   return (
     <>
-      <NavBar formData={formData} />
+      <NavBar formData={formData || { name: "", phoneNumber: "", email: "" }} />
+
       <div className="main-container">
         <div className="nav-page2">
           <Typography variant="h4">Stored Form Data</Typography>

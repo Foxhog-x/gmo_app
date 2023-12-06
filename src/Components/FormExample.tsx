@@ -16,8 +16,24 @@ interface FormValues {
   email: string;
   setEnterDetailText: React.Dispatch<React.SetStateAction<boolean>>;
   enterDetailText: boolean;
-  formValues: FormValues;
+  formValues?: {
+    name: string;
+    phoneNumber: string;
+    email: string;
+  };
 }
+
+interface InitialFormValues {
+  name: string;
+  phoneNumber: string;
+  email: string;
+}
+
+const initialFormValues: InitialFormValues = {
+  name: "",
+  phoneNumber: "",
+  email: "",
+};
 
 const FormExample: React.FC<FormValues> = (props) => {
   const { enterDetailText, setEnterDetailText } = props;
@@ -26,11 +42,8 @@ const FormExample: React.FC<FormValues> = (props) => {
     setEnterDetailText(false);
   };
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: "",
-    phoneNumber: "",
-    email: "",
-  });
+  const [formValues, setFormValues] =
+    useState<InitialFormValues>(initialFormValues);
   const [isValidPhone, setIsValidPhone] = useState<boolean>(true);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
 
