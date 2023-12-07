@@ -14,7 +14,7 @@ interface FormData {
   name: string;
   phoneNumber: string;
   email: string;
-  // ... other properties
+ 
 }
 
 const departmentData: Department[] = [
@@ -45,10 +45,11 @@ const TreeStructure: React.FC<Department> = () => {
   }, []);
 
   const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = [event.target.checked, event.target.checked];
+    const newChecked = Array(departmentData.length).fill(event.target.checked);
+  
     setChecked(newChecked);
   };
-
+  
   const handleChildChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -61,8 +62,8 @@ const TreeStructure: React.FC<Department> = () => {
         newChecked[i] = true;
 
         departmentData[i].sub_departments.forEach((subIndex) => {
-          // Convert subIndex to a number if it represents an index or position
-          const numericSubIndex = parseInt(subIndex, 10); // assuming subIndex is a string representing a number
+ 
+          const numericSubIndex = parseInt(subIndex, 10);  
 
           if (!isNaN(numericSubIndex)) {
             newChecked[i + numericSubIndex + 1] = true;
@@ -102,8 +103,8 @@ const TreeStructure: React.FC<Department> = () => {
   return (
     <>
       <NavBar formData={formData || { name: "", phoneNumber: "", email: "" }} />
-      <div>
-        <Box
+      <div className="tree_box">
+         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -111,19 +112,22 @@ const TreeStructure: React.FC<Department> = () => {
             justifyContent: "center",
             height: "100vh",
           }}
-        >
+        ><div className="box_panal">
           <FormControlLabel
             label="Parent"
             control={
               <Checkbox
-                checked={checked[0] && checked[1]}
-                indeterminate={checked[0] !== checked[1]}
-                onChange={handleChange1}
-              />
+              checked={checked[0] && checked[1]}
+              indeterminate={checked[0] !== checked[1]}
+              onChange={handleChange1}
+            />
+            
             }
           />
           {children}
+          </div>
         </Box>
+       
       </div>
     </>
   );

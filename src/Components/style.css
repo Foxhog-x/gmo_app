@@ -29,3 +29,24 @@
     height: 100vh;
 
 }
+
+
+.form_card{
+    border: 2px solid black;
+    width: 400px;
+    padding: 10px;
+}
+
+.form_logout_btn{
+    padding: 5px;
+    margin-top: 20px;
+}
+ 
+.box_panal{
+    padding: 20px;
+ 
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

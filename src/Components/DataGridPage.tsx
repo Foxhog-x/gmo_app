@@ -12,7 +12,7 @@ interface FormData {
   name: string;
   phoneNumber: string;
   email: string;
-  // ... other properties
+ 
 }
 interface DataGridPage {
   name: string;
@@ -69,17 +69,18 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
         <div className="nav-page2">
           <Typography variant="h4">Stored Form Data</Typography>
         </div>
-
+         
         {formData ? (
-          <div>
-            <p>Name: {formData?.name}</p>
-            <p>Phone Number: {formData?.phoneNumber}</p>
+          <div className="form_card">
+            <h2>Name: {formData?.name}</h2>
+            <br />
             <p>Email: {formData?.email}</p>
-            <Button onClick={handleLogout}>Logout</Button>
+            <p>Phone_No: {formData?.phoneNumber}</p>
           </div>
         ) : (
           <p>No form data found</p>
         )}
+          <div className="form_logout_btn">  <Button  onClick={handleLogout}>Logout</Button></div>
       </div>
       <div
         style={{
@@ -89,7 +90,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
           textAlign: "center",
         }}
       >
-        <div className="nav-page2"></div>
+         
 
         <DataGrid rows={posts} columns={columns} checkboxSelection />
       </div>
