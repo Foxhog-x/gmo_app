@@ -1,5 +1,3 @@
-// AnotherComponent.tsx
-
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -12,7 +10,6 @@ interface FormData {
   name: string;
   phoneNumber: string;
   email: string;
- 
 }
 interface DataGridPage {
   name: string;
@@ -69,7 +66,7 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
         <div className="nav-page2">
           <Typography variant="h4">Stored Form Data</Typography>
         </div>
-         
+
         {formData ? (
           <div className="form_card">
             <h2>Name: {formData?.name}</h2>
@@ -80,7 +77,10 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
         ) : (
           <p>No form data found</p>
         )}
-          <div className="form_logout_btn">  <Button  onClick={handleLogout}>Logout</Button></div>
+        <div className="form_logout_btn">
+          {" "}
+          <Button onClick={handleLogout}>Logout</Button>
+        </div>
       </div>
       <div
         style={{
@@ -90,8 +90,6 @@ const DataGridPage: React.FC<DataGridPage> = (props) => {
           textAlign: "center",
         }}
       >
-         
-
         <DataGrid rows={posts} columns={columns} checkboxSelection />
       </div>
     </>
